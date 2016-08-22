@@ -18,6 +18,12 @@
         "marker": "/* Add Component LESS Above */",
         "template": "@import \"<%= filename %>\";"
       }
-    }
+    },
+    "modules": [
+      {
+        "name": "reuniao",
+        "file": "reuniao\\reuniao.js"
+      }
+    ]
   }
 }
