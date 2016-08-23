@@ -21,6 +21,6 @@
     "moment": "~2.12",
     "less.js": "~2.6",
     "font-awesome": "~4.5",
-    "angular-ui-utils": "^3.0.0"
+    "angular-ui-utils": "^3"
   }
 }
