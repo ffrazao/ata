@@ -3,7 +3,7 @@ angular.module('ata', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'reuniao']);
 angular.module('ata').config(function($stateProvider, $urlRouterProvider) {
 
     /* Add New States Above */
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/');
 
 });
 
