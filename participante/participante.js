@@ -7,23 +7,25 @@ angular.module('participante').config(function($stateProvider) {
 });
 
 angular.module('participante').controller('ParticipanteCtrl',function($scope, $uibModalInstance, lista) {
-	
+    
     $scope.cadastro = { original: null, registro: null, lista: lista };
 
     $scope.id = -1;
-    lista.forEach(function(e) {
-    	if (e.id > $scope.id) {
-    		$scope.id = e.id;
-    	}
-    });
+    if (lista) {
+        lista.forEach(function(e) {
+            if (e.id > $scope.id) {
+                $scope.id = e.id;
+            }
+        });
+    }
     $scope.id++;
 
-	$scope.ok = function () {
-	    $uibModalInstance.close($scope.cadastro);
-	};
+    $scope.ok = function () {
+        $uibModalInstance.close($scope.cadastro);
+    };
 
-	$scope.cancel = function () {
-	    $uibModalInstance.dismiss('cancel');
-	};
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 
 });

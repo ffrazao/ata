@@ -23,8 +23,6 @@ angular.module('reuniao').controller('ReuniaoListaCtrl', function($scope, $uibMo
 
 		modalInstance.result.then(function (cadastro) {
 			angular.copy(cadastro.lista, lista);
-		}, function () {
-			$log.info('Modal dismissed at: ' + new Date());
 		});
     };
 
