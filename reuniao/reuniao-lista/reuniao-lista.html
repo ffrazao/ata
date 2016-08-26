@@ -21,13 +21,13 @@
                         <tr>
                             <th rowspan="2">#</th>
                             <th><a ng-click="ordem = 'assunto'">Assunto</a></th>
-                            <th><a ng-click="ordem = 'inicio'">Início</a></th>
+                            <th rowspan="2"><a ng-click="ordem = 'inicio'">Início</a></th>
+                            <th rowspan="2"><a ng-click="ordem = 'termino'">Término</a></th>
                             <th rowspan="2">Participantes</th>
                             <th rowspan="2">Ações</th>
                         </tr>
                         <tr>
                             <th>Pauta</th>
-                            <th><a ng-click="ordem = 'termino'">Término</a></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,7 +38,8 @@
                             </td>
                             <td rowspan="2">
                                 <input class="form-control" type="text" ng-model="item.inicio" placeholder="dd/mm/aaaa hh:mm">
-                                <br>
+                            </td>
+                            <td rowspan="2">
                                 <input class="form-control" type="text" ng-model="item.termino" placeholder="dd/mm/aaaa hh:mm">
                             </td>
                             <td rowspan="2">
