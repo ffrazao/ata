@@ -7,11 +7,18 @@ angular.module('reuniao').config(function($stateProvider, $urlRouterProvider) {
         templateUrl: 'reuniao/reuniao-lista/reuniao-lista.html'
     });
 
+    $stateProvider.state('frm', {
+        url: '/reuniao/form/:id',
+        templateUrl: 'reuniao/frm/frm.html',
+        controller: 'ReuniaoCtrl',
+    });
+
 });
 
 angular.module('reuniao').controller('ReuniaoCtrl', function($scope) {
 
     $scope.cadastro = { original: null, registro: null, lista: [] };
+    $scope.cadastro.lista = [{"id":1,"pautaList":[{"id":0,"ordem":1,"$$hashKey":"object:48","tema":"Abertura"},{"id":1,"ordem":2,"$$hashKey":"object:61","tema":"Encerramento"}],"participanteList":[{"id":0,"nome":"Fernando Frazao","instituicao":"EMATER-DF","email":"ffrazao@gmail.com"},{"id":1,"nome":"José Roberto","instituicao":"CEB-DF","email":"jr@ceb.df.gov.br","telefone":"(61) 99999-9999"}],"assunto":"Acompanhamento CGTIC","inicio":"01/01/2016 08:00"}];
 
     $scope.id = 0;
 
