@@ -43,7 +43,10 @@
                                 <input class="form-control" type="text" ng-model="item.termino" placeholder="dd/mm/aaaa hh:mm">
                             </td>
                             <td rowspan="2">
-                                <button type="button" class="btn btn-info">...</button>
+                                <button type="button" class="btn btn-info" ng-click="incluirParticipante(item.participanteList)">...</button>
+                                <ol>
+                                    <li ng-repeat="part in item.participanteList | orderBy: 'nome' track by part.id">{{part.nome}}, {{part.instituicao}}</li>
+                                </ol>
                             </td>
                             <td rowspan="2">
                                 <button type="button" class="btn btn-warning">Editar</button>
@@ -59,7 +62,7 @@
                                     <tr ng-repeat="pauta in item.pautaList | orderBy: 'ordem'">
                                         <td>{{$index + 1}}</td>
                                         <td>
-                                            <textarea placeholder="Conteúdo da pauta" class="form-control" ng-model="pauta.conteudo"></textarea>
+                                            <textarea placeholder="Tema da pauta" class="form-control" ng-model="pauta.tema"></textarea>
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-danger btn-xs" ng-click="excluirItem(item.pautaList, pauta)">

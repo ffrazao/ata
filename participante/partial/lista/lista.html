@@ -1,0 +1,56 @@
+<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">Cadastro de Participantes</h3>
+</div>
+<div class="modal-body" id="modal-body">
+	<button type="button" class="btn btn-success" ng-click="id = incluir(cadastro.lista, {id: id})">Novo</button>
+	<button type="button" class="btn btn-danger" ng-click="limpar(cadastro.lista)" ng-show="cadastro.lista.length">Limpar</button>
+	<div class="panel panel-default">
+		<div class="panel-body" ng-hide="cadastro.lista.length">
+			<div class="alert alert-warning" role="alert" style="margin: 0px;">
+				<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> Nenhum registro localizado!
+			</div>
+		</div>
+		<div class="table-responsive" ng-show="cadastro.lista.length">
+			<table class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th><a ng-click="ordem = 'nome'">Nome</a></th>
+						<th><a ng-click="ordem = 'instituicao'">Instituição</a></th>
+						<th><a ng-click="ordem = 'email'">E-mail</a></th>
+						<th><a ng-click="ordem = 'telefone'">Telefone</a></th>
+						<th>Ação</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in cadastro.lista | orderBy: ordem track by item.id">
+						<td>{{$index + 1}}</td>
+						<td>
+							<input class="form-control" type="text" ng-model="item.nome" placeholder="Nome">
+						</td>
+						<td>
+							<input class="form-control" type="text" ng-model="item.instituicao" placeholder="Instituição">
+						</td>
+						<td>
+							<input class="form-control" type="text" ng-model="item.email" placeholder="E-mail">
+						</td>
+						<td>
+							<input class="form-control" type="text" ng-model="item.telefone" placeholder="Telefone">
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger btn-xs" ng-click="excluir(cadastro.lista, item)">
+							<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<div class="pull-right">
+		<button type="button" class="btn btn-info" ng-click="ok()">Ok</button>
+		<button type="button" class="btn btn-info" ng-click="cancel()">Cancelar</button>
+	</div>
+</div>

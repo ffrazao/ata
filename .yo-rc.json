@@ -23,6 +23,10 @@
       {
         "name": "reuniao",
         "file": "reuniao\\reuniao.js"
+      },
+      {
+        "name": "participante",
+        "file": "participante\\participante.js"
       }
     ]
   }

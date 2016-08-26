@@ -16,7 +16,7 @@ angular.module('reuniao').controller('ReuniaoCtrl', function($scope) {
     $scope.id = 0;
 
     $scope.incluir = function() {
-        $scope.cadastro.lista.push({ id: $scope.id++, pautaList: [] });
+        $scope.cadastro.lista.push({ id: $scope.id++, pautaList: [], participanteList: [] });
     };
 
     $scope.limpar = function() {
