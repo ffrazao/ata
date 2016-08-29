@@ -1,4 +1,161 @@
 <div class="col-md-12" ng-controller="FrmCtrl">
-	Olá! [{{cadastro.registro}}]
-
+    <div class="row">
+        <table>
+            <tr>
+                <td>
+                    Assunto:
+                </td>
+                <th>
+                    {{cadastro.registro.assunto}}
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    Início:
+                </td>
+                <th>
+                    {{cadastro.registro.inicio}}
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    Término:
+                </td>
+                <th>
+                    <input class="form-control" id="termino" name="termino_{{$index}}" ng-model="cadastro.registro.termino" ng-pattern="/^(\d{2})/(\d{2})/(\d{4})\s(\d{2}):(\d{2})$/" ng-required="false" ng-trim="true" placeholder="dd/mm/aaaa hh:mm" type="text">
+                    <div class="label label-danger" ng-show="frm['termino_' + $index].$error.required">
+                        <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign">
+                        </span>
+                        Campo Obrigatório!
+                    </div>
+                    <div class="label label-danger" ng-show="frm['termino_' + $index].$error.pattern">
+                        <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign">
+                        </span>
+                        Valor inválido!
+                    </div>
+                    </input>
+                </th>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <fieldset>
+                <legend>
+                    ATA
+                </legend>
+                <uib-tabset active="active" justified="true">
+                <uib-tab disable="tab.disabled" heading="{{tab.tema}}" index="$index + 1" ng-repeat="tab in cadastro.registro.pautaList">
+                <text-angular ng-model="pauta">
+                </text-angular>
+                </uib-tab>
+                </uib-tabset>
+            </fieldset>
+        </div>
+        <div class="col-md-6">
+            <fieldset>
+                <legend>
+                    Tarefas
+                </legend>
+                <div class="panel panel-default">
+                    <button class="btn btn-success" ng-click="id = incluir(cadastro.lista, {id: id})" type="button">
+                    Novo
+                    </button>
+                    <button class="btn btn-danger" ng-click="limpar(cadastro.lista)" ng-show="cadastro.lista.length" type="button">
+                    Limpar
+                    </button>
+                    <div class="panel-body" ng-hide="cadastro.lista.length">
+                        <div class="alert alert-warning" role="alert" style="margin: 0px;">
+                            <span aria-hidden="true" class="glyphicon glyphicon-warning-sign">
+                            </span>
+                            Nenhum registro localizado!
+                        </div>
+                    </div>
+                    <div class="table-responsive" ng-show="cadastro.lista.length">
+                        <ng-form name="frm">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        <a ng-click="ordem = 'nome'">
+                                            Descrição
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a ng-click="ordem = 'instituicao'">
+                                            Prazo
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a ng-click="ordem = 'email'">
+                                            Responsáveis
+                                        </a>
+                                    </th>
+                                    <th>
+                                        Ação
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in cadastro.lista | orderBy: ordem track by item.id">
+                                    <td>
+                                        {{$index + 1}}
+                                    </td>
+                                    <td>
+                                        <input class="form-control" id="nome" name="nome_{{$index}}" ng-model="item.nome" ng-required="true" placeholder="Nome" type="text">
+                                        <div class="label label-danger" ng-show="frm['nome_' + $index].$error.required">
+                                            <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign">
+                                            </span>
+                                            Campo Obrigatório
+                                        </div>
+                                        </input>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" id="instituicao" name="instituicao_{{$index}}" ng-model="item.instituicao" ng-required="true" placeholder="Instituição" type="text">
+                                        <div class="label label-danger" ng-show="frm['instituicao_' + $index].$error.required">
+                                            <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign">
+                                            </span>
+                                            Campo Obrigatório
+                                        </div>
+                                        </input>
+                                    </td>
+                                    <td>
+                                        <uib-accordion close-others="true" tooltip-placement="top" uib-tooltip="{{participante.instituicao}}">
+                                        <div uib-accordion-group class="panel-default" heading="Expandir" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                                            <div class="well">
+                                                <div class="checkbox" ng-repeat="participante in cadastro.registro.participanteList">
+                                                    <label for="participante_{{$index}}">
+                                                        <input id="participante_{{$index}}" name="participante" type="checkbox" checklist-model="item.participanteList" checklist-value="participante.id" tooltip-placement="top" uib-tooltip="{{participante.instituicao}}">
+                                                        {{participante.nome}}
+                                                        </input>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            [{{item.participanteList}}]
+                                        </div>
+                                        </uib-accordion>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-xs" ng-click="excluir(cadastro.lista, item)">
+                                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </ng-form>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
 </div>
+<td>
+    <button class="btn btn-danger btn-xs" ng-click="excluir(cadastro.lista, item)" type="button">
+    <span aria-hidden="true" class="glyphicon glyphicon-minus">
+    </span>
+    </button>
+</td>

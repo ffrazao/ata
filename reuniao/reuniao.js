@@ -4,7 +4,8 @@ angular.module('reuniao').config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider.state('reuniao-lista', {
         url: '/',
-        templateUrl: 'reuniao/reuniao-lista/reuniao-lista.html'
+        templateUrl: 'reuniao/reuniao-lista/reuniao-lista.html',
+        controller: 'ReuniaoCtrl',
     });
 
     $stateProvider.state('frm', {

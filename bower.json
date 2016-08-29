@@ -21,6 +21,8 @@
     "moment": "~2.12",
     "less.js": "~2.6",
     "font-awesome": "~4.5",
-    "angular-ui-utils": "^3"
+    "angular-ui-utils": "^3",
+    "textAngular": "^1.5.7",
+    "checklist-model": "^0.10.0"
   }
 }
