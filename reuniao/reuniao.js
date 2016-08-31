@@ -24,7 +24,10 @@ angular.module('reuniao').controller('ReuniaoCtrl', function($scope) {
     $scope.id = 0;
 
     $scope.incluir = function() {
-        $scope.cadastro.lista.push({ id: $scope.id++, pautaList: [], participanteList: [] });
+        if (!$scope.cadastro.lista.tarefaList) {
+            $scope.cadastro.lista.tarefaList = [];
+        }
+        $scope.cadastro.lista.tarefaList.push({ id: $scope.id++, participanteList: [] });
     };
 
     $scope.limpar = function() {

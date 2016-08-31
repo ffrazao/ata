@@ -36,6 +36,14 @@
                     </input>
                 </th>
             </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button class="btn btn-warning" ng-click="emitirRelatorio()">
+                    Emitir Relatório
+                    </button>
+                </td>
+            </tr>
         </table>
     </div>
     <div class="row">
@@ -46,8 +54,7 @@
                 </legend>
                 <uib-tabset active="active" justified="true">
                 <uib-tab disable="tab.disabled" heading="{{tab.tema}}" index="$index + 1" ng-repeat="tab in cadastro.registro.pautaList">
-                <text-angular ng-model="pauta">
-                </text-angular>
+                <text-angular ng-model="tab.pauta"/>
                 </uib-tab>
                 </uib-tabset>
             </fieldset>
@@ -58,20 +65,20 @@
                     Tarefas
                 </legend>
                 <div class="panel panel-default">
-                    <button class="btn btn-success" ng-click="id = incluir(cadastro.lista, {id: id})" type="button">
+                    <button class="btn btn-success" ng-click="incluir(cadastro.lista.tarefaList, {id: id})" type="button">
                     Novo
                     </button>
-                    <button class="btn btn-danger" ng-click="limpar(cadastro.lista)" ng-show="cadastro.lista.length" type="button">
+                    <button class="btn btn-danger" ng-click="limpar(cadastro.lista.tarefaList)" ng-show="cadastro.lista.tarefaList.length" type="button">
                     Limpar
                     </button>
-                    <div class="panel-body" ng-hide="cadastro.lista.length">
+                    <div class="panel-body" ng-hide="cadastro.lista.tarefaList.length">
                         <div class="alert alert-warning" role="alert" style="margin: 0px;">
                             <span aria-hidden="true" class="glyphicon glyphicon-warning-sign">
                             </span>
                             Nenhum registro localizado!
                         </div>
                     </div>
-                    <div class="table-responsive" ng-show="cadastro.lista.length">
+                    <div class="table-responsive" ng-show="cadastro.lista.tarefaList.length">
                         <ng-form name="frm">
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
@@ -100,7 +107,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in cadastro.lista | orderBy: ordem track by item.id">
+                                <tr ng-repeat="item in cadastro.lista.tarefaList | orderBy: ['ordem'] track by item.id">
                                     <td>
                                         {{$index + 1}}
                                     </td>
@@ -123,23 +130,27 @@
                                         </input>
                                     </td>
                                     <td>
-                                        <uib-accordion close-others="true" tooltip-placement="top" uib-tooltip="{{participante.instituicao}}">
-                                        <div uib-accordion-group class="panel-default" heading="Expandir" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                                        <uib-accordion close-others="true" tooltip-placement="top">
+                                        <div uib-accordion-group class="panel-default" heading="({{item.participanteList.length}} resp.)" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
                                             <div class="well">
                                                 <div class="checkbox" ng-repeat="participante in cadastro.registro.participanteList">
-                                                    <label for="participante_{{$index}}">
-                                                        <input id="participante_{{$index}}" name="participante" type="checkbox" checklist-model="item.participanteList" checklist-value="participante.id" tooltip-placement="top" uib-tooltip="{{participante.instituicao}}">
+                                                    <label for="participante_{{$index}}" uib-tooltip="{{participante.instituicao}}">
+                                                        <input id="participante_{{$index}}" name="participante" type="checkbox" checklist-model="item.participanteList" checklist-value="participante.id" tooltip-placement="top">
                                                         {{participante.nome}}
                                                         </input>
                                                     </label>
                                                 </div>
                                             </div>
-                                            [{{item.participanteList}}]
                                         </div>
                                         </uib-accordion>
+                                        <input type="number" class="sr-only" id="totalParticipante" name="totalParticipante_{{$index}}" ng-min="1" ng-model="item.participanteList.length">
+                                        <div class="label label-danger" ng-show="frm['totalParticipante_' + $index].$error.min">
+                                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                            Quantidade mínima de registros não atingida!
+                                        </div>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-danger btn-xs" ng-click="excluir(cadastro.lista, item)">
+                                        <button type="button" class="btn btn-danger btn-xs" ng-click="excluir(cadastro.lista.tarefaList, item)">
                                         <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                                         </button>
                                     </td>
@@ -153,9 +164,3 @@
         </div>
     </div>
 </div>
-<td>
-    <button class="btn btn-danger btn-xs" ng-click="excluir(cadastro.lista, item)" type="button">
-    <span aria-hidden="true" class="glyphicon glyphicon-minus">
-    </span>
-    </button>
-</td>
