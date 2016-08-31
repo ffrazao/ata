@@ -27,6 +27,10 @@
       {
         "name": "participante",
         "file": "participante\\participante.js"
+      },
+      {
+        "name": "relatorio",
+        "file": "relatorio\\relatorio.js"
       }
     ]
   }

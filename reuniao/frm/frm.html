@@ -1,6 +1,7 @@
+<ng-include src="'cabecalho/cabecalho.html'"></ng-include>
 <div class="col-md-12" ng-controller="FrmCtrl">
     <div class="row">
-        <table>
+        <table class="table">
             <tr>
                 <td>
                     Assunto:
@@ -42,24 +43,27 @@
                     <button class="btn btn-warning" ng-click="emitirRelatorio()">
                     Emitir Relatório
                     </button>
+                    <button class="btn btn-info" ui-sref="reuniao-lista">
+                    Voltar
+                    </button>
                 </td>
             </tr>
         </table>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
             <fieldset>
                 <legend>
                     ATA
                 </legend>
                 <uib-tabset active="active" justified="true">
-                <uib-tab disable="tab.disabled" heading="{{tab.tema}}" index="$index + 1" ng-repeat="tab in cadastro.registro.pautaList">
+                <uib-tab disable="tab.disabled" heading="{{$index + 1}}. {{tab.tema}}" index="$index + 1" ng-repeat="tab in cadastro.registro.pautaList">
                 <text-angular ng-model="tab.pauta"/>
                 </uib-tab>
                 </uib-tabset>
             </fieldset>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
             <fieldset>
                 <legend>
                     Tarefas
@@ -112,7 +116,7 @@
                                         {{$index + 1}}
                                     </td>
                                     <td>
-                                        <input class="form-control" id="nome" name="nome_{{$index}}" ng-model="item.nome" ng-required="true" placeholder="Nome" type="text">
+                                        <textarea cols="80" class="form-control" style="min-width: 260px;" id="nome" name="nome_{{$index}}" ng-model="item.nome" ng-required="true" placeholder="Nome"></textarea>
                                         <div class="label label-danger" ng-show="frm['nome_' + $index].$error.required">
                                             <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign">
                                             </span>

@@ -1,9 +1,10 @@
+<ng-include src="'cabecalho/cabecalho.html'"></ng-include>
 <div class="col-md-12" ng-controller="ReuniaoListaCtrl">
     <ng-form name="frm">
     <div class="row">
         <dir class="col-md-12">
         <button type="button" class="btn btn-success" ng-click="incluir()">Novo</button>
-        <button type="button" class="btn btn-info" ng-show="cadastro.lista.length" ng-disabled="frm.$invalid">Salvar</button>
+        <button type="button" class="btn btn-info sr-only" ng-show="cadastro.lista.length" ng-disabled="frm.$invalid">Salvar</button>
         <button type="button" class="btn btn-danger" ng-click="limpar()" ng-show="cadastro.lista.length">Limpar</button>
         </dir>
     </div>
@@ -20,29 +21,30 @@
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th rowspan="2">#</th>
-                            <th><a ng-click="ordem = 'assunto'">Assunto</a></th>
-                            <th rowspan="2"><a ng-click="ordem = 'inicio'">Início</a></th>
-                            <th rowspan="2"><a ng-click="ordem = 'termino'">Término</a></th>
-                            <th rowspan="2">Participantes</th>
-                            <th rowspan="2">Ações</th>
+                            <th rowspan="3">#</th>
+                            <th><a ng-click="ordem = 'assunto'">Local</a></th>
+                            <th><a ng-click="ordem = 'assunto'">Assunto da Reunião</a></th>
+                            <th rowspan="3">Participantes</th>
+                            <th rowspan="3">Ações</th>
                         </tr>
                         <tr>
-                            <th>Pauta</th>
+                            <th><a ng-click="ordem = 'inicio'">Início</a></th>
+                            <th rowspan="2">Pauta</th>
+                        </tr>
+                        <tr>
+                            <th><a ng-click="ordem = 'termino'">Término</a></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat-start="item in cadastro.lista | orderBy: ordem track by item.id">
                             <td rowspan="2">{{$index + 1}}</td>
-                            <td>
-                                <input class="form-control" type="text" ng-model="item.assunto" placeholder="Assunto" id="assunto" name="assunto_{{$index}}" ng-required="true" ng-trim="true">
-                                <div class="label label-danger" ng-show="frm['assunto_' + $index].$error.required">
+                            <td rowspan="2">
+                                <input class="form-control" type="text" ng-model="item.local" placeholder="Local de realização da reunião" id="local" name="local_{{$index}}" ng-required="true" ng-trim="true">
+                                <div class="label label-danger" ng-show="frm['local_' + $index].$error.required">
                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                     Campo Obrigatório!
                                 </div>
-                            </td>
-                            <td rowspan="2">
-                                <input class="form-control" type="text" ng-model="item.inicio" placeholder="dd/mm/aaaa hh:mm" id="inicio" name="inicio_{{$index}}" ng-required="true" ng-pattern="/^(\d{2})/(\d{2})/(\d{4})\s(\d{2}):(\d{2})$/" ng-trim="true">
+                                <input class="form-control" type="text" ng-model="item.inicio" placeholder="Início dd/mm/aaaa hh:mm" id="inicio" name="inicio_{{$index}}" ng-required="true" ng-pattern="/^(\d{2})/(\d{2})/(\d{4})\s(\d{2}):(\d{2})$/" ng-trim="true">
                                 <div class="label label-danger" ng-show="frm['inicio_' + $index].$error.required">
                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                     Campo Obrigatório!
@@ -51,9 +53,7 @@
                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                     Valor inválido!
                                 </div>
-                            </td>
-                            <td rowspan="2">
-                                <input class="form-control" type="text" ng-model="item.termino" placeholder="dd/mm/aaaa hh:mm" id="termino" name="termino_{{$index}}" ng-required="false" ng-pattern="/^(\d{2})/(\d{2})/(\d{4})\s(\d{2}):(\d{2})$/" ng-trim="true">
+                                <input class="form-control" type="text" ng-model="item.termino" placeholder="Término dd/mm/aaaa hh:mm" id="termino" name="termino_{{$index}}" ng-required="false" ng-pattern="/^(\d{2})/(\d{2})/(\d{4})\s(\d{2}):(\d{2})$/" ng-trim="true">
                                 <div class="label label-danger" ng-show="frm['termino_' + $index].$error.required">
                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                     Campo Obrigatório!
@@ -61,6 +61,13 @@
                                 <div class="label label-danger" ng-show="frm['termino_' + $index].$error.pattern">
                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                     Valor inválido!
+                                </div>
+                            </td>
+                            <td>
+                                <input class="form-control" type="text" ng-model="item.assunto" placeholder="Assunto da Reunião" id="assunto" name="assunto_{{$index}}" ng-required="true" ng-trim="true">
+                                <div class="label label-danger" ng-show="frm['assunto_' + $index].$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Campo Obrigatório!
                                 </div>
                             </td>
                             <td rowspan="2">
@@ -85,7 +92,7 @@
                             <td>
                                 <button type="button" class="btn btn-success btn-xs" ng-click="incluirPauta(item)">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                </button>
+                                </button> Pauta
                                 <table class="table table-condensed">
                                     <tr ng-repeat="pauta in item.pautaList | orderBy: 'ordem'">
                                         <td>{{$index + 1}}</td>

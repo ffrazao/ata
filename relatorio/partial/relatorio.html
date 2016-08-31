@@ -1,0 +1,85 @@
+<div class="col-md-12" ng-controller="RelatorioCtrl" style="background-color: white;">
+	<h2><b>Ata de Reunião</b></h2>
+	<h3><b>{{cadastro.assunto}}</b></h3>
+	<p>{{cadastro.local}}, {{cadastro.inicio}}</p>
+	<p><b>Participantes:</b></p>
+	<table class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Nome</th>
+				<th>Instituição</th>
+				<th>E-mail</th>
+				<th>Telefone</th>
+				<th>Assinatura</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in cadastro.lista | orderBy: ordem track by item.id">
+				<td>{{$index + 1}}</td>
+				<td>
+					{{item.nome}}
+				</td>
+				<td>
+					{{item.instituicao}}
+				</td>
+				<td>
+					{{item.email}}
+				</td>
+				<td>
+					{{item.telefone}}
+				</td>
+				<td>
+					______________________________________
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p><b>Discussão:</b></p>
+	<ui>
+	<li ng-repeat-start="part in cadastro.participanteList | orderBy: 'nome'">{{part.nome}}</li>
+	<div ng-repeat-end ng-bind-html-unsafe="item.texto"></div>
+	</ui>
+	<p><b>Tarefas:</b></p>
+	<table class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>
+					#
+				</th>
+				<th>
+					Descrição
+				</th>
+				<th>
+					Prazo
+				</th>
+				<th>
+					Responsáveis
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in cadastro.lista.tarefaList | orderBy: ['ordem'] track by item.id">
+				<td>
+					{{$index + 1}}
+				</td>
+				<td>
+					{{item.nome}}
+				</td>
+				<td>
+					{{item.instituicao}}
+				</td>
+				<td>
+					<div class="checkbox" ng-repeat="participante in cadastro.registro.participanteList">
+						<label for="participante_{{$index}}" uib-tooltip="{{participante.instituicao}}">
+							<input id="participante_{{$index}}" name="participante" type="checkbox" checklist-model="item.participanteList" checklist-value="participante.id" tooltip-placement="top">
+							{{participante.nome}}
+							</input>
+						</label>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>Encerramento: {{cadastro.termino}}</p>
+</div>

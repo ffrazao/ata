@@ -9,6 +9,9 @@
 @import "reuniao/reuniao-lista/reuniao-lista.less";
 @import "participante/participante.less";
 @import "reuniao/frm/frm.less";
+@import "relatorio/relatorio.less";
+@import "relatorio/partial/relatorio.less";
+@import "cabecalho/cabecalho.less";
 /* Add Component LESS Above */
 
 /* Required for Angular UI Bootstrap */
@@ -25,3 +28,11 @@
 //		.translate(0,0);
 //	}
 //}
+
+@bgcolor: #F3E2A9;
+
+body {
+    background-color: @bgcolor;
+    background: -webkit-gradient(linear, left top, left bottom, from(@bgcolor), to(#fff)) fixed;
+
+}

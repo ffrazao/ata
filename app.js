@@ -1,5 +1,4 @@
-angular.module('ata', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'ngResource',
-    'textAngular', 'checklist-model', 'reuniao', 'participante']);
+angular.module('ata', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'ngResource', 'textAngular', 'checklist-model', 'reuniao', 'participante', 'relatorio']);
 
 angular.module('ata').config(function($stateProvider, $urlRouterProvider) {
 
