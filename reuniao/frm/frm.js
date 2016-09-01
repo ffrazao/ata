@@ -8,7 +8,7 @@ angular.module('ata').controller('FrmCtrl',function($scope, $state, $stateParams
 
 	$scope.emitirRelatorio = function () {
         $scope.savarRegistro($scope.cadastro.registro);
-		var url = $state.href('relatorio', {parameter: {id: $scope.cadastro.registro.id + 1}});
+		var url = $state.href('relatorio', {id: $scope.cadastro.registro.id});
 		window.open(url,'_blank');
 	};
 

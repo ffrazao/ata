@@ -37,7 +37,18 @@ angular.module('reuniao').controller('ReuniaoCtrl', function($scope) {
     });
     $scope.id++;
 
+    $scope.incluirReuniao = function() {
+        if (!$scope.cadastro.lista) {
+        	$scope.cadastro.lista = [];
+        }
+        $scope.id++;
+        $scope.cadastro.lista.push({id: $scope.id, participanteList: []});
+    };
+
     $scope.incluir = function() {
+    	if (!$scope.cadastro.registro) {
+    		$scope.cadastro.registro = {};
+    	}
         if (!$scope.cadastro.registro.tarefaList) {
             $scope.cadastro.registro.tarefaList = [];
         }

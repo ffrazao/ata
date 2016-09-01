@@ -3,6 +3,9 @@ angular.module('reuniao').controller('ReuniaoListaCtrl', function($scope, $uibMo
     $scope.pautaId = 0;
 
     $scope.incluirPauta = function(reg) {
+        if (!reg.pautaList) {
+            reg.pautaList = [];
+        }
         reg.pautaList.push({ id: $scope.pautaId++, ordem: reg.pautaList.length + 1 });
     };
 
