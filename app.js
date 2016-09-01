@@ -45,4 +45,31 @@ angular.module('ata').run(function($rootScope) {
         }
     };
 
+    $rootScope.savarRegistro = function (reg) {
+        var salvo = -1, lista = $rootScope.restaurarRegistro();
+        if (lista && lista.length) {
+            for (var i = 0; i < lista.length; i++) {
+                if (lista[i].id === reg.id) {
+                    salvo = i;
+                    break;
+                }
+            }
+        }
+        if (salvo === -1) {
+            lista.push(reg);
+        } else {
+            lista[i] = reg;
+        }
+        localStorage.setItem("lista", JSON.stringify(lista));
+    };
+
+    $rootScope.restaurarRegistro = function () {
+        var lista = angular.fromJson(localStorage.getItem("lista"));
+        if (!lista) {
+            lista = [{"id":1,"pautaList":[{"id":0,"ordem":1,"$$hashKey":"object:48","tema":"Abertura"},{"id":1,"ordem":2,"$$hashKey":"object:61","tema":"Encerramento"}],"participanteList":[{"id":0,"nome":"Fernando Frazao","instituicao":"EMATER-DF","email":"ffrazao@gmail.com"},{"id":1,"nome":"José Roberto","instituicao":"CEB-DF","email":"jr@ceb.df.gov.br","telefone":"(61) 99999-9999"}],"assunto":"Acompanhamento CGTIC","inicio":"01/01/2016 08:00"}];
+            localStorage.setItem("lista", JSON.stringify(lista));
+        }
+        return lista;
+    };
+
 });

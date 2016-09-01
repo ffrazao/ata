@@ -18,16 +18,30 @@ angular.module('reuniao').config(function($stateProvider, $urlRouterProvider) {
 
 angular.module('reuniao').controller('ReuniaoCtrl', function($scope) {
 
-    $scope.cadastro = { original: null, registro: null, lista: [] };
-    $scope.cadastro.lista = [{"id":1,"pautaList":[{"id":0,"ordem":1,"$$hashKey":"object:48","tema":"Abertura"},{"id":1,"ordem":2,"$$hashKey":"object:61","tema":"Encerramento"}],"participanteList":[{"id":0,"nome":"Fernando Frazao","instituicao":"EMATER-DF","email":"ffrazao@gmail.com"},{"id":1,"nome":"José Roberto","instituicao":"CEB-DF","email":"jr@ceb.df.gov.br","telefone":"(61) 99999-9999"}],"assunto":"Acompanhamento CGTIC","inicio":"01/01/2016 08:00"}];
+    $scope.cadastro = { original: null, registro: null };
+
+    //localStorage.clear();
+
+    $scope.cadastro.lista = $scope.restaurarRegistro();
+    angular.fromJson(localStorage.getItem("lista"));
+    if (!$scope.cadastro.lista) {
+        $scope.cadastro.lista = [{"id":1,"pautaList":[{"id":0,"ordem":1,"$$hashKey":"object:48","tema":"Abertura"},{"id":1,"ordem":2,"$$hashKey":"object:61","tema":"Encerramento"}],"participanteList":[{"id":0,"nome":"Fernando Frazao","instituicao":"EMATER-DF","email":"ffrazao@gmail.com"},{"id":1,"nome":"José Roberto","instituicao":"CEB-DF","email":"jr@ceb.df.gov.br","telefone":"(61) 99999-9999"}],"assunto":"Acompanhamento CGTIC","inicio":"01/01/2016 08:00"}];
+        localStorage.setItem("lista", JSON.stringify($scope.cadastro.lista));
+    }
 
     $scope.id = 0;
+    $scope.cadastro.lista.forEach(function(k,v) {
+        if (v > $scope.id) {
+            $scope.id = v;
+        }
+    });
+    $scope.id++;
 
     $scope.incluir = function() {
-        if (!$scope.cadastro.lista.tarefaList) {
-            $scope.cadastro.lista.tarefaList = [];
+        if (!$scope.cadastro.registro.tarefaList) {
+            $scope.cadastro.registro.tarefaList = [];
         }
-        $scope.cadastro.lista.tarefaList.push({ id: $scope.id++, participanteList: [] });
+        $scope.cadastro.registro.tarefaList.push({ id: $scope.id++, participanteList: [] });
     };
 
     $scope.limpar = function() {

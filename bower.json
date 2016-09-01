@@ -23,6 +23,7 @@
     "font-awesome": "~4.5",
     "angular-ui-utils": "^3",
     "textAngular": "^1.5.7",
-    "checklist-model": "^0.10.0"
+    "checklist-model": "^0.10.0",
+    "modernizr": "^3.3.1"
   }
 }
