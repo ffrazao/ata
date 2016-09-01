@@ -32,7 +32,7 @@
                     Término:
                 </td>
                 <th>
-                    <input class="form-control" id="termino" name="termino_{{$index}}" ng-model="cadastro.registro.termino" ng-pattern="/^(\d{2})/(\d{2})/(\d{4})\s(\d{2}):(\d{2})$/" ng-required="false" ng-trim="true" placeholder="dd/mm/aaaa hh:mm" type="text">
+                    <input class="form-control" id="termino" name="termino_{{$index}}" ng-model="cadastro.registro.termino" ng-pattern="/^(\d{2})/(\d{2})/(\d{4})\s(\d{2}):(\d{2})$/" ng-required="true" ng-trim="true" placeholder="dd/mm/aaaa hh:mm" type="text">
                     <div class="label label-danger" ng-show="frm['termino_' + $index].$error.required">
                         <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign">
                         </span>

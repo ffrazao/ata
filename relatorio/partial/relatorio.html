@@ -1,7 +1,10 @@
 <div class="col-md-12" ng-controller="RelatorioCtrl" style="background-color: white;">
+	<h1><b>{{cadastro.assunto}}</b></h1>
 	<h2><b>Ata de Reunião</b></h2>
-	<h3><b>{{cadastro.assunto}}</b></h3>
-	<p>{{cadastro.local}}, {{cadastro.inicio}}</p>
+	<p>Local {{cadastro.local}}, em {{cadastro.inicio}}</p>
+	<br>
+	<br>
+	<br>
 	<p><b>Participantes:</b></p>
 	<table class="table table-striped table-bordered table-hover">
 		<thead>
@@ -15,7 +18,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="item in cadastro.lista | orderBy: ordem track by item.id">
+			<tr ng-repeat="item in cadastro.participanteList | orderBy: 'nome' track by item.id">
 				<td>{{$index + 1}}</td>
 				<td>
 					{{item.nome}}
@@ -29,16 +32,19 @@
 				<td>
 					{{item.telefone}}
 				</td>
-				<td>
-					______________________________________
+				<td align="center">
+					
 				</td>
 			</tr>
 		</tbody>
 	</table>
+	<br>
 	<p><b>Discussão:</b></p>
 	<ui>
-	<li ng-repeat-start="part in cadastro.participanteList | orderBy: 'nome'">{{part.nome}}</li>
-	<div ng-repeat-end ng-bind-html-unsafe="item.texto"></div>
+	<li ng-repeat="item in cadastro.pautaList | orderBy: 'ordem'"><h4><u>{{item.tema}}</u></h4>
+		<div ng-bind-html="item.pauta"></div>
+		<br>
+	</li>
 	</ui>
 	<p><b>Tarefas:</b></p>
 	<table class="table table-striped table-bordered table-hover">
@@ -59,27 +65,25 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="item in cadastro.lista.tarefaList | orderBy: ['ordem'] track by item.id">
+			<tr ng-repeat="item in cadastro.tarefaList | orderBy: ['descricao'] track by item.id">
 				<td>
 					{{$index + 1}}
 				</td>
 				<td>
-					{{item.nome}}
+					{{item.descricao}}
 				</td>
 				<td>
-					{{item.instituicao}}
+					{{item.prazo}}
 				</td>
 				<td>
-					<div class="checkbox" ng-repeat="participante in cadastro.registro.participanteList">
-						<label for="participante_{{$index}}" uib-tooltip="{{participante.instituicao}}">
-							<input id="participante_{{$index}}" name="participante" type="checkbox" checklist-model="item.participanteList" checklist-value="participante.id" tooltip-placement="top">
-							{{participante.nome}}
-							</input>
-						</label>
-					</div>
+					<ui>
+					<li ng-repeat="participante in item.participanteList">
+						{{indiceDePorCampo(cadastro.participanteList, "id", participante).nome}}
+					</li>
+					</ui>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<p>Encerramento: {{cadastro.termino}}</p>
+	<p><b>Encerramento:</b> {{cadastro.termino}}</p>
 </div>
