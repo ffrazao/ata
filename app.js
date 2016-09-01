@@ -79,7 +79,7 @@ angular.module('ata').run(function($rootScope) {
         }
         for (var i = 0; i < lista.length; i++) {
             if (lista[i][nomeCampo] === valorCampo) {
-                return lista[i];
+                return angular.copy(lista[i]);
             }
         }
     };
