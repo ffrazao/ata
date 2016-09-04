@@ -1,5 +1,5 @@
 <br><br>
-<div class="jumbotron" style="background: -webkit-gradient(linear, left top, left bottom, from(gray), to(#fff)) fixed; color: #F3E2A9">
+<div class="jumbotron" style="background: -webkit-gradient(linear, left top, left bottom, from(gray), to(#fff)) fixed; color: #F3E2A9" ng-controller="CabecalhoCtrl">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
@@ -7,7 +7,10 @@
 			</div>
 			<div class="col-md-10">
 				<h1>Gerador de Atas de Reunião!</h1>
-				<p style="color: white">Redigir atas de reunião, atribuir tarefas e imprimir o conteúdo, tudo isso <i>off line</i></p>
+				<p style="color: white">
+					Redigir atas de reunião, atribuir tarefas e imprimir o conteúdo, tudo isso <i>off line</i>
+					<button class="btn btn-default btn-sm" ng-click="abrirGit()">Disponível em <img alt="Disponível em GitHub" class="gh-mark" src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" width="24" height="24"></button>
+				</p>
 			</div>
 		</div>
 	</div>
