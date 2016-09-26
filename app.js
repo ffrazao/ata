@@ -74,7 +74,7 @@ angular.module('ata').run(function($rootScope) {
     };
 
     $rootScope.indiceDePorCampo = function (lista, nomeCampo, valorCampo) {
-        if (!lista || !nomeCampo || !valorCampo) {
+        if (!lista || (!nomeCampo)) {
             return;
         }
         for (var i = 0; i < lista.length; i++) {
