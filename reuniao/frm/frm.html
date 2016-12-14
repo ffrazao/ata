@@ -67,6 +67,7 @@
                 <uib-tabset active="active">
                 <uib-tab disable="tab.disabled" heading="{{$index + 1}}. {{tab.tema}}" index="$index + 1" ng-repeat="tab in cadastro.registro.pautaList">
                 <text-angular ng-model="tab.pauta"/>
+                <textarea ui-tinymce="tinymceOptions" ng-model="tab.pauta" options="tinymceOptions"></textarea>
                 </uib-tab>
                 </uib-tabset>
             </fieldset>

@@ -16,5 +16,14 @@ angular.module('ata').controller('FrmCtrl',function($scope, $state, $stateParams
         $scope.savarRegistro($scope.cadastro.registro);
         $state.go("reuniao-lista");
 	};
-
+$scope.tinymceOptions = {
+    onChange: function(e) {
+      // put logic here for keypress and cut/paste changes
+    },
+    inline: false,
+    plugins : 'advlist autolink link image lists charmap print preview',
+    skin: 'lightgray',
+    theme : 'modern'
+  };
+  
 });
